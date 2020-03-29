@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider, connect} from 'react-redux';
-import {createStore, applyMiddleware} from "redux";
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware, combineReducers} from "redux";
+import thunkMiddleware from 'redux-thunk';
 import {createLogger} from "redux-logger/src";
 import './index.css';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
-import {searchRobots} from "./reducers";
-const logger = createLogger();
+import {searchRobots, requestRobots} from "./reducers";
 // action -> reducer -> store -> changes | uses flux pattern
-const store = createStore(searchRobots, applyMiddleware(logger));
+const logger = createLogger();
+const rootReducer = combineReducers({searchRobots, requestRobots});
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 ReactDOM.render(<Provider store={store}>
                     <App />
