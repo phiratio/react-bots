@@ -6,6 +6,7 @@ import Scroll from '../components/Scroll';
 import ErrorBoundary from "../components/ErrorBoundry";
 import './App.css';
 import {setSearchField, requestRobots} from "../actions";
+import Header from "../components/Header";
 
 // parameter state comes from index.js provider store state(rootReducers)
 const mapStateToProps = state => {
@@ -41,7 +42,7 @@ class App extends Component {
             <h1>Loading</h1> :
             (
                 <div className='tc'>
-                    <h1 className='f1'>RoboFriends</h1>
+                    <Header/>
                     <SearchBox searchChange={onSearchChange}/>
                     <Scroll>
                         <ErrorBoundary>
